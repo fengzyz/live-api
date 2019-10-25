@@ -1,15 +1,13 @@
 # 介绍
 
-NoteBook 是一个简单的个人笔记小程序。
-
-后端使用 [Hyperf](https://github.com/hyperf-cloud/hyperf) 框架，前端使用 [uniapp](https://uniapp.dcloud.io/)。
+后端使用 [Hyperf](https://github.com/hyperf-cloud/hyperf) 框架.
 
 # 项目详情
 
 ## 环境
 
 ```dotenv
-APP_NAME=NoteBook
+APP_NAME=Live
 
 # Mysql
 DB_DRIVER=mysql
