@@ -12,6 +12,8 @@ namespace App\Model;
 class Anchor extends Model
 {
 
+
+    protected $dateFormat = 'U';
     /**
      * The table associated with the model.
      *
@@ -24,12 +26,12 @@ class Anchor extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'name', 'wechat', 'head_images', 'openid', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'name', 'wechat', 'head_images', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'gender' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer',  'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
