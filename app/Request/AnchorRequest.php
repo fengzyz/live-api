@@ -37,7 +37,8 @@ class AnchorRequest extends FormRequest
             //'height'         => 'required',
             //'platform'       => 'required',
             //'work_type'      => 'required',
-            'cover_image'    => 'required'
+            'cover_image'    => 'required',
+
         ];
     }
 

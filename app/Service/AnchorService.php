@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: shuyu
@@ -8,14 +9,22 @@
 
 namespace App\Service;
 use App\Model\Anchor;
+use App\Service\Dao\AnchorDao;
+use App\Service\Formatter\AnchorFormatter;
+use Hyperf\Di\Annotation\Inject;
 
 
 class AnchorService extends Service
 {
-    public function search(){
-
+    /**
+     * @Inject
+     * @var AnchorDao
+     */
+    protected $dao;
+    public function search($offset = 0, $limit = 10){
+        $anchorDao = $this->dao->find($offset, $limit);
+        return $anchorDao;
     }
-
     /**
      * 添加主播
      */

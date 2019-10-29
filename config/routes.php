@@ -21,6 +21,7 @@ Router::addGroup(
         Router::post('/register', 'App\Controller\V1\UserController@register');
         Router::get('/adszone', 'App\Controller\V1\AdszoneController@indexInit');
         Router::post('/anchor/add', 'App\Controller\V1\AnchorController@addAnchor');
+        Router::get('/anchor/list', 'App\Controller\V1\AnchorController@anchorList');
     },
     ['middleware' => [CorsMiddleware::class]])
 ;

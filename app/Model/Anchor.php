@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: shuyu
@@ -7,12 +8,21 @@
  */
 
 namespace App\Model;
+use Hyperf\Database\Model\SoftDeletes;
 
 
+/**
+ * @property $id
+ * @property $name
+ * @property $gender
+ * @property $created_at
+ * @property $updated_at
+ */
 class Anchor extends Model
 {
+    use SoftDeletes;
 
-
+    const CHECK_STATUS = 2;
     protected $dateFormat = 'U';
     /**
      * The table associated with the model.

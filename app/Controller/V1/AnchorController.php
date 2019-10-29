@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: shuyu
@@ -13,6 +14,7 @@ use App\Controller\Controller;
 use App\Request\AnchorRequest;
 use App\Service\AnchorService;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\HttpServer\Request;
 
 
 
@@ -23,8 +25,13 @@ class AnchorController extends Controller
      * @var AnchorService
      */
     protected $anchorService;
-    public function  anchor(AnchorRequest $request){
-        
+
+    public function  anchorList(Request $request){
+        $offset = (int) $request->input('offset');
+        $limit = (int) $request->input('limit');
+        $result = $this->anchorService->search($offset, $limit);
+
+        return $this->response->success($result);
     }
 
     public function addAnchor(AnchorRequest $request){
@@ -50,7 +57,7 @@ class AnchorController extends Controller
         }
         foreach ($fileCover as $key => $val) {
 
-            $extension = $file->getExtension();
+            $extension = $val->getExtension();
             if(!in_array($extension,$allowed_extensions)){
                 return $this->response->fail('201');
             }
