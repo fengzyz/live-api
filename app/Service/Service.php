@@ -33,15 +33,4 @@ abstract class Service
         $this->container = $container;
         $this->logger = $container->get(StdoutLoggerInterface::class);
     }
-
-    /**
-     * 生成唯一ID
-     * @return mixed
-     */
-    private function getUuid()
-    {
-        //$container = ApplicationContext::getContainer();
-        $generator = $this->container->get(IdGeneratorInterface::class);
-        return (string)$generator->generate();
-    }
 }

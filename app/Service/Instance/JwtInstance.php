@@ -37,10 +37,10 @@ class JwtInstance
 
     public function encode(User $user)
     {
-        $this->id = $user->id;
+        $this->id = $user->uuid;
         $this->user = $user;
 
-        return JWT::encode(['id' => $user->id], self::KEY);
+        return JWT::encode(['id' => $user->uuid], self::KEY);
     }
 
     public function decode(string $token): self

@@ -29,7 +29,7 @@ class UserInstance
 
         /** @var User $model */
         foreach ($models as $model) {
-            $this->models[$model->id] = $model;
+            $this->models[$model->uuid] = $model;
         }
     }
 
