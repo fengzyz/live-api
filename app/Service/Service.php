@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Hyperf\Contract\StdoutLoggerInterface;
+
 use Psr\Container\ContainerInterface;
 
 abstract class Service
@@ -31,5 +32,16 @@ abstract class Service
     {
         $this->container = $container;
         $this->logger = $container->get(StdoutLoggerInterface::class);
+    }
+
+    /**
+     * 生成唯一ID
+     * @return mixed
+     */
+    private function getUuid()
+    {
+        //$container = ApplicationContext::getContainer();
+        $generator = $this->container->get(IdGeneratorInterface::class);
+        return (string)$generator->generate();
     }
 }

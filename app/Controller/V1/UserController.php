@@ -12,15 +12,26 @@ declare(strict_types=1);
 
 namespace App\Controller\V1;
 
+use App\Constants\StatusCode;
+use App\Kernel\Http\ResponseCreater;
 use App\Controller\Controller;
 use App\Request\LoginRequest;
 use App\Request\RegisterRequest;
 use App\Service\Formatter\UserFormatter;
+use Hyperf\HttpServer\Contract\ResponseInterface;
 use App\Service\UserService;
 use Hyperf\Di\Annotation\Inject;
 
 class UserController extends Controller
 {
+
+    /**
+     * 通过 `@Inject` 注解注入由 `@var` 注解声明的属性类型对象
+     *
+     * @Inject
+     * @var ResponseCreater
+     */
+    private $responseCreater;
     /**
      * @Inject
      * @var UserService
@@ -32,16 +43,12 @@ class UserController extends Controller
      * @param LoginRequest $request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request,ResponseInterface $response)
     {
         $code = (string) $request->input('code');
 
         [$token, $user] = $this->userService->login($code);
-
-        return $this->response->success([
-            'token' => $token,
-            'userInfo' => UserFormatter::instance()->base($user),
-        ]);
+        return $this->responseCreater->success($request, $response, ['token' => $token], StatusCode::getMessage(StatusCode::Success));
     }
 
     /**

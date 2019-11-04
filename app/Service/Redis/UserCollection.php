@@ -31,16 +31,9 @@ class UserCollection extends StringCollection
                 $this->set($openid, $id);
             }
         }
-
         if (empty($user) && $id) {
             $user = di()->get(UserDao::class)->first($id);
         }
-
-        if (empty($user)) {
-            $this->delete($openid);
-            return null;
-        }
-
         return $user;
     }
 

@@ -50,7 +50,8 @@
         "hyperf/utils": "~1.1.0",
         "hyperf/validation": "~1.1.0",
         "limingxinleo/redis-collection": "^1.2",
-        "overtrue/wechat": "^4.2"
+        "overtrue/wechat": "^4.2",
+        "hyperf/snowflake": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

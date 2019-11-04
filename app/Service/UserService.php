@@ -14,6 +14,7 @@ namespace App\Service;
 
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
+use Hyperf\Snowflake\IdGeneratorInterface;
 use App\Kernel\Oauth\WeChatFactory;
 use App\Service\Dao\UserDao;
 use App\Service\Instance\JwtInstance;
@@ -37,17 +38,14 @@ class UserService extends Service
     public function login(string $code)
     {
         $app = $this->factory->create();
-
         $session = $app->auth->session($code);
-
         $user = di()->get(UserCollection::class)->getUser($session['openid']);
-
         if (empty($user)) {
-            throw new BusinessException(ErrorCode::USER_NOT_REGIST);
+            $user = $this->dao->create($session['openid']);
+            $user->uuid = $this->getUuid();
+            $user->save();
         }
-
         $token = JwtInstance::instance()->encode($user);
-
         return [$token, $user];
     }
 
@@ -64,5 +62,16 @@ class UserService extends Service
         $token = JwtInstance::instance()->encode($user);
 
         return [$token, $user];
+    }
+
+    /**
+     * 生成唯一ID
+     * @return mixed
+     */
+    private function getUuid()
+    {
+        //$container = ApplicationContext::getContainer();
+        $generator = $this->container->get(IdGeneratorInterface::class);
+        return (string)$generator->generate();
     }
 }

@@ -52,18 +52,14 @@ class UserDao extends Service
      * ]
      * @return User
      */
-    public function create($userInfo)
+    public function create($openid)
     {
-        $model = User::query()->where('openid', $userInfo['openId'])->first();
+        $model = User::query()->where('openid', $openid)->first();
         if (empty($model)) {
             $model = new User();
-            $model->openid = $userInfo['openId'];
+            $model->openid = $openid;
         }
 
-        $model->nickname = $userInfo['nickName'];
-        $model->avatar = $userInfo['avatarUrl'];
-        $model->gender = $userInfo['gender'];
-        $model->save();
 
         return $model;
     }
