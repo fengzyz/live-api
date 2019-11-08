@@ -1,6 +1,6 @@
 # 介绍
 
-后端使用 [Hyperf](https://github.com/hyperf-cloud/hyperf) 框架.
+电播会API接口 后端使用 [Hyperf](https://github.com/hyperf-cloud/hyperf) 框架.
 
 # 项目详情
 
