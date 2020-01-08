@@ -20,7 +20,7 @@ class ResponseCreater extends AbstractAnnotation
      * @param $data
      * @return PsrResponseInterface
      */
-    public function create($request, $response, ?string $statusCode, ?string $message, $data): PsrResponseInterface
+    public function create($response, ?string $statusCode, ?string $message, $data): PsrResponseInterface
     {
 
         $result = new ResponseJson([
@@ -49,11 +49,11 @@ class ResponseCreater extends AbstractAnnotation
      * @param string|null $message
      * @return PsrResponseInterface
      */
-    public  function success($request, $response, $data, ?string $message = null): PsrResponseInterface
+    public  function success($response, $data, ?string $message = null): PsrResponseInterface
     {
         $statusCode = StatusCode::Success;
         $message = $message ?? StatusCode::getMessage(StatusCode::Success);
-        return $this->create($request, $response, $statusCode, $message, $data);
+        return $this->create($response, $statusCode, $message, $data);
     }
 
     /**
@@ -63,10 +63,10 @@ class ResponseCreater extends AbstractAnnotation
      * @param null $data
      * @return PsrResponseInterface
      */
-    public  function error($request, $response, string $statusCode, ?string $message = null, $data = null): PsrResponseInterface
+    public  function error($response, string $statusCode, ?string $message = null, $data = null): PsrResponseInterface
     {
         $message = $message ?? StatusCode::getMessage($statusCode);
 
-        return $this->create($request, $response, $statusCode, $message, $data);
+        return $this->create($response, $statusCode, $message, $data);
     }
 }

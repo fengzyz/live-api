@@ -26,8 +26,8 @@ class UserController extends Controller
 {
 
     /**
-     * 通过 `@Inject` 注解注入由 `@var` 注解声明的属性类型对象
-     *
+     * 通过 `@Inject` 注解注入由 `
+     * @var` 注解声明的属性类型对象
      * @Inject
      * @var ResponseCreater
      */
@@ -43,12 +43,18 @@ class UserController extends Controller
      * @param LoginRequest $request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function login(LoginRequest $request,ResponseInterface $response)
+    public function login(LoginRequest $request)
     {
-        $code = (string) $request->input('code');
-
-        [$token, $user] = $this->userService->login($code);
-        return $this->responseCreater->success($request, $response, ['token' => $token], StatusCode::getMessage(StatusCode::Success));
+        $code     = (string)$request->input('code');
+        $data['nickname'] =  (string)$request->input('nickname');
+        $data['avatar'] =  (string)$request->input('avatar');
+        $data['gender']   =  (int)$request->input('gender');
+        $data['province'] = (string)$request->input('province');
+        $data['language'] = (string)$request->input('language');
+        $data['city']     = (string)$request->input('city');
+        $data['country']  = (string)$request->input('country');
+        [$token, $user] = $this->userService->login($data, $code);
+        return $this->response->success(['userInfo'=>$user], StatusCode::getMessage(StatusCode::Success));
     }
 
     /**

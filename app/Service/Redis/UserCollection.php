@@ -20,7 +20,7 @@ class UserCollection extends StringCollection
 {
     protected $prefix = 'user:openid:';
 
-    public function getUser(string $openid): ?User
+    public function getUser(string $openid): ? User
     {
         $id = $this->get($openid);
         $user = null;

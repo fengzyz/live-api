@@ -35,15 +35,27 @@ class UserService extends Service
      */
     protected $dao;
 
-    public function login(string $code)
+    public function login($data,$code)
     {
         $app = $this->factory->create();
         $session = $app->auth->session($code);
+        //$data['openid'] = $session['openid'];
         $user = di()->get(UserCollection::class)->getUser($session['openid']);
         if (empty($user)) {
             $user = $this->dao->create($session['openid']);
             $user->uuid = $this->getUuid();
+            $user->nickname = $data['nickname'];
+            $user->avatar   = $data['avatar'];
+            $user->gender   = $data['gender'];
+            $user->province = $data['province'];
+            $user->language = $data['language'];
+            $user->city     = $data['city'];
+            $user->country  = $data['country'];
+            $token = JwtInstance::instance()->encode($user);
+            $user->last_token  = $token;
+            $user->last_at  = date('Y-m-d H:i:s',time());
             $user->save();
+            return [$token, $user];
         }
         $token = JwtInstance::instance()->encode($user);
         return [$token, $user];

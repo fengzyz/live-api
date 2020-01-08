@@ -57,10 +57,8 @@ class UserDao extends Service
         $model = User::query()->where('openid', $openid)->first();
         if (empty($model)) {
             $model = new User();
-            $model->openid = $openid;
+            $model->openid   = $openid;
         }
-
-
         return $model;
     }
 }
