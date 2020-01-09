@@ -8,9 +8,6 @@
 
 namespace App\Job;
 use Hyperf\AsyncQueue\Job;
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SmtpTransport;
 
 class LastTokenJob extends Job
 {
