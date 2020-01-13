@@ -39,7 +39,6 @@ class UserService extends Service
     {
         $app = $this->factory->create();
         $session = $app->auth->session($code);
-        //$data['openid'] = $session['openid'];
         $user = di()->get(UserCollection::class)->getUser($session['openid']);
         if (empty($user)) {
             $user = $this->dao->create($session['openid']);

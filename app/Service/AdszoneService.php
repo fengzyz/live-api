@@ -23,6 +23,5 @@ class AdszoneService extends Service
     {
         $adsZone = $this->dao->find($id);
         return $adsZone;
-        //return AdszoneFormatter::instance()->formatArray($adsZone);
     }
 }
