@@ -54,7 +54,7 @@ class UserController extends Controller
         $data['city']     = (string)$request->input('city');
         $data['country']  = (string)$request->input('country');
         [$token, $user] = $this->userService->login($data, $code);
-        return $this->response->success(['userInfo'=>$user], StatusCode::getMessage(StatusCode::Success));
+        return $this->response->success(['userInfo'=>$user,'token'=>$token], StatusCode::getMessage(StatusCode::Success));
     }
 
     /**
